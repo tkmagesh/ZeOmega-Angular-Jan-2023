@@ -49,11 +49,11 @@
             };
 
             #callbacks = {
-                basic: null,
-                hra: null,
-                da: null,
-                tax: null,
-                salary: null
+                basic: [],
+                hra: [],
+                da: [],
+                tax: [],
+                salary: []
             };
 
             get(attrName){
@@ -63,13 +63,15 @@
             set(attrName, value){
                 if (this.#data[attrName] === value) return;
                 this.#data[attrName]= value
-                var callbackFn = this.#callbacks[attrName];
-                if (typeof callbackFn === 'function')
-                    callbackFn()
+                var cbFns = this.#callbacks[attrName];
+                cbFns.forEach(function(callbackFn){
+                    if (typeof callbackFn === 'function')
+                        callbackFn()    
+                });
             }
 
             subscribe(attrName, callbackFn){
-                this.#callbacks[attrName]= callbackFn
+                this.#callbacks[attrName].push(callbackFn)
             }
            
 
