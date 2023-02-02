@@ -1,0 +1,70 @@
+JS Functions
+    1. Functions are first class citizens (Higher Order Functions)
+
+function isPrime(no){
+    //initialize the cache
+    isPrime['cache'] = isPrime['cache'] || {}
+    
+    //check the result is already memorized
+    if (typeof isPrime.cache[no] !== 'undefined')
+        return isPrime.cache[no];
+
+    //process the input and memorize the result
+    console.log(`processing ${no}`);
+    isPrime.cache[no] = true
+    for (var i = 2; i <= (no/2); i++) {
+        if (no % i === 0) {
+            isPrime.cache[no] = false
+            break;
+        }
+    }
+    return isPrime.cache[no]
+}
+
+var isPrime = (function () {
+    //initialize the cache
+    var cache = {}
+
+    return function (no) {
+        //check the result is already memorized
+        if (typeof cache[no] !== 'undefined')
+            return cache[no];
+
+        //process the input and memorize the result
+        console.log(`processing ${no}`);
+        cache[no] = true
+        for (var i = 2; i <= (no / 2); i++) {
+            if (no % i === 0) {
+                cache[no] = false
+                break;
+            }
+        }
+        return cache[no]
+    }
+})()
+
+var isEven = (function () {
+    //initialize the cache
+    var cache = {}
+
+    return function (no) {
+        //check the result is already memorized
+        if (typeof cache[no] !== 'undefined')
+            return cache[no];
+
+        //process the input and memorize the result
+        console.log(`processing ${no}`);
+        cache[no] = no % 2 === 0
+        return cache[no]
+    }
+})()
+
+2. Variadic functions
+    function sum(){
+        var result = 0;
+        for (var i = 0; i < arguments.length; i++ ){
+            result += arguments[i]
+        }
+        return result
+    }
+3. 
