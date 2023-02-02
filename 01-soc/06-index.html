@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+    <style>
+        body{
+            margin-left: 50px;
+        }
+        .field{
+            margin-bottom: 10px;
+        }
+        label{
+            display: block;
+        }
+        td{
+            padding-right: 10px;
+            font-size: 16pt;
+        }
+    </style>
+    <script src="jquery-3.6.3.js"></script>
+    <script>
+        /* state & behavior of a salary calculator */
+        class SalaryCalculatorModel{
+            //state
+            // basic = 0;
+           /* 
+            #basic = 0; //private
+            onBasicChange = null;
+
+            getBasic(){
+                return this.#basic
+            };
+            setBasic(val){
+                if (val === this.#basic) return
+                this.#basic = val;
+                if (typeof this.onBasicChange === 'function')
+                    this.onBasicChange()
+            } 
+            */
+            #data = {
+                basic : 0,
+                hra : 0,
+                da : 0,
+                tax : 0,
+                salary : 0
+            };
+
+            #callbacks = {
+                basic: null,
+                hra: null,
+                da: null,
+                tax: null,
+                salary: null
+            };
+
+            get(attrName){
+                return this.#data[attrName]
+            }
+
+            set(attrName, value){
+                if (this.#data[attrName] === value) return;
+                this.#data[attrName]= value
+                var callbackFn = this.#callbacks[attrName];
+                if (typeof callbackFn === 'function')
+                    callbackFn()
+            }
+
+            subscribe(attrName, callbackFn){
+                this.#callbacks[attrName]= callbackFn
+            }
+           
+
+            calculate(){
+                var gross = this.get('basic') + this.get('hra') + this.get('da'),
+                    net = gross * ((100 - this.get('tax')) / 100);
+                this.set('salary', net);
+            }
+        }
+
+        /* UI Responsibilites */
+        $(function(){
+
+            window['model'] = new SalaryCalculatorModel()
+
+            $('#txtBasic').change(function(){
+                model.set('basic',  Number($(this).val()))
+            });
+
+            $('#txtHra').change(function(){
+                model.set('hra',  Number($(this).val()))
+            });
+
+            $('#txtDa').change(function(){
+                model.set('da', Number($(this).val()))
+            });
+
+            $('#rangeTax').change(function(){
+                model.set('tax', Number($(this).val()))
+            });
+
+            $('#btnCalculate').click(function(){
+                model.calculate()
+            })
+
+            model.subscribe('salary', function(){
+                $('#tdSalary').text(model.get('salary'));
+            });
+
+            model.subscribe('basic', function(){
+                $('#tdBasic').text(model.get('basic'));
+            })
+
+            model.subscribe('hra', function () {
+                $('#tdHra').text(model.get('hra'));
+            })
+
+            model.subscribe('da', function () {
+                $('#tdDa').text(model.get('da'));
+            })
+
+            model.subscribe('tax', function () {
+                $('#tdTax').text(model.get('tax'));
+            })
+        })
+        
+    </script>
+</head>
+<body>
+    <h1>Salary Calculator</h1>
+    <hr>
+    <section>
+        <div class="field">
+            <label for="">Basic :</label>
+            <input type="number" name="" id="txtBasic">
+        </div>
+        <div class="field">
+            <label for="">HRA :</label>
+            <input type="number" name="" id="txtHra">
+        </div>
+        <div class="field">
+            <label for="">DA :</label>
+            <input type="number" name="" id="txtDa">
+        </div>
+        <div class="field">
+            <label for="">Tax :</label>
+            <input type="range" name="" id="rangeTax" min="0" max="30" value="0">
+        </div>
+        <div class="field">
+            <button id="btnCalculate">Calculate</button>
+        </div>
+        <div class="field">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Basic</th>
+                        <th>HRA</th>
+                        <th>DA</th>
+                        <th>Tax</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="tdBasic">[Basic]</td>
+                        <td id="tdHra">[HRA]</td>
+                        <td id="tdDa">[DA]</td>
+                        <td id="tdTax">[Tax]</td>
+                        <td id="tdSalary">[Salary]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+<script>
+   
+</script>
+</html>
