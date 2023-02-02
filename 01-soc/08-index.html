@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+    <style>
+        body{
+            margin-left: 50px;
+        }
+        .field{
+            margin-bottom: 10px;
+        }
+        label{
+            display: block;
+        }
+        td{
+            padding-right: 10px;
+            font-size: 16pt;
+        }
+    </style>
+    <script src="jquery-3.6.3.js"></script>
+    <script>
+        /* state & behavior of a salary calculator */
+        class SalaryCalculatorModel{
+            //state
+            // basic = 0;
+           /* 
+            #basic = 0; //private
+            onBasicChange = null;
+
+            getBasic(){
+                return this.#basic
+            };
+            setBasic(val){
+                if (val === this.#basic) return
+                this.#basic = val;
+                if (typeof this.onBasicChange === 'function')
+                    this.onBasicChange()
+            } 
+            */
+            #data = {
+                basic : 0,
+                hra : 0,
+                da : 0,
+                tax : 0,
+                salary : 0
+            };
+
+            #callbacks = {
+                basic: [],
+                hra: [],
+                da: [],
+                tax: [],
+                salary: []
+            };
+
+            get(attrName){
+                return this.#data[attrName]
+            }
+
+            set(attrName, value){
+                if (this.#data[attrName] === value) return;
+                this.#data[attrName]= value
+                var cbFns = this.#callbacks[attrName];
+                cbFns.forEach(function(callbackFn){
+                    if (typeof callbackFn === 'function')
+                        callbackFn()    
+                });
+            }
+
+            subscribe(attrName, callbackFn){
+                this.#callbacks[attrName].push(callbackFn)
+            }
+           
+
+            calculate(){
+                var gross = this.get('basic') + this.get('hra') + this.get('da'),
+                    net = gross * ((100 - this.get('tax')) / 100);
+                this.set('salary', net);
+            }
+        }
+
+        /* UI Responsibilites */
+        class SalaryCalculator{
+            
+            $El = $('<div></div>')
+            #template = `
+                <section>
+                    <div class="field">
+                        <label for="">Basic :</label>
+                        <input type="number" name="" id="txtBasic">
+                    </div>
+                    <div class="field">
+                        <label for="">HRA :</label>
+                        <input type="number" name="" id="txtHra">
+                    </div>
+                    <div class="field">
+                        <label for="">DA :</label>
+                        <input type="number" name="" id="txtDa">
+                    </div>
+                    <div class="field">
+                        <label for="">Tax :</label>
+                        <input type="range" name="" id="rangeTax" min="0" max="30" value="0">
+                    </div>
+                    <div class="field">
+                        <button id="btnCalculate">Calculate</button>
+                    </div>
+                    <div class="field">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Basic</th>
+                                    <th>HRA</th>
+                                    <th>DA</th>
+                                    <th>Tax</th>
+                                    <th>Salary</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="tdBasic">[Basic]</td>
+                                    <td id="tdHra">[HRA]</td>
+                                    <td id="tdDa">[DA]</td>
+                                    <td id="tdTax">[Tax]</td>
+                                    <td id="tdSalary">[Salary]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            `
+            model = null
+
+            constructor(model){
+                this.model = model;
+                var that = this;
+                //Reacting to user actions
+                this.$El.on('change', '#txtBasic',function () {
+                    model.set('basic', Number($(this).val()))
+                });
+
+                this.$El.on('change', '#txtHra',function () {
+                    model.set('hra', Number($(this).val()))
+                });
+
+                this.$El.on('change', '#txtDa',function () {
+                    model.set('da', Number($(this).val()))
+                });
+
+                this.$El.on('change', '#rangeTax',function () {
+                    model.set('tax', Number($(this).val()))
+                });
+
+                this.$El.on('click', '#btnCalculate',function () {
+                    model.calculate()
+                })
+
+                //Reacting to model changes
+                model.subscribe('salary', function () {
+                    $('#tdSalary', that.$El).text(model.get('salary'));
+                });
+
+                model.subscribe('basic', function () {
+                    $('#tdBasic', that.$El).text(model.get('basic'));
+                })
+
+                model.subscribe('hra', function () {
+                    $('#tdHra', that.$El).text(model.get('hra'));
+                })
+
+                model.subscribe('da', function () {
+                    $('#tdDa', that.$El).text(model.get('da'));
+                })
+
+                model.subscribe('tax', function () {
+                    $('#tdTax', that.$El).text(model.get('tax'));
+                })
+            }
+
+            render(){
+                this.$El.html(this.#template)
+            }
+        }
+       
+        $(function(){
+
+            window['model'] = new SalaryCalculatorModel()
+
+            //view - 1
+            var v1 = new SalaryCalculator(model)
+            v1.$El.appendTo(document.body)
+            v1.render()
+
+            //view - 2
+            var v2 = new SalaryCalculator(model)
+            v2.$El.appendTo(document.body)
+            v2.render()
+
+        }) 
+       
+        
+    </script>
+</head>
+<body>
+    <h1>Salary Calculator</h1>
+    <hr>
+    
+</body>
+</html>
