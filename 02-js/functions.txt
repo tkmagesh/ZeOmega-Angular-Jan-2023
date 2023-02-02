@@ -68,3 +68,41 @@ var isEven = (function () {
         return result
     }
 3. 
+
+function memoize(fn) {
+    //initialize the cache
+    var cache = {}
+
+    return function (no) {
+        //check the result is already memorized
+        if (typeof cache[no] !== 'undefined')
+            return cache[no];
+
+        //process the input and memorize the result
+        console.log(`processing ${no}`);
+        cache[no] = fn(no)
+        return cache[no]
+    }
+}
+
+var isPrime = memoize(function(no){
+    for (var i = 2; i <= (no / 2); i++) {
+        if (no % i === 0) {
+            return false;
+        }
+    }
+    return true;
+})
+
+var isEven = memoize(function(no){
+    return no % 2 === 0
+})
+
+TODO:
+Rewrite the Memoize function so that it can work with any function taking any number of arguments
+
+The following should work
+var add = memoize(function(x,y){
+    return x + y
+})
+add(100,200)
