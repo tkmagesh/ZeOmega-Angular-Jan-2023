@@ -92,4 +92,50 @@ ES6 features
     for (var x of listIterator())
     console.log(x)
 
+    function getData(){
+        var nos = []
+        for (var i = 0; i < 1000; i++) {
+            nos[i] = i + 3
+        }
+        return nos
+    }
+    function getPrimes(list) {
+        return {
+            [Symbol.iterator]: function () {
+                var idx = -1;
+                return {
+                    next : function(){
+                        var found = false
+                        while (!found){
+                            if (idx >= list.length){
+                                break
+                            }
+                            idx++
+                            if (isPrime(list[idx])) {
+                                found = true
+                                break
+                            }
+                        }
+                        if (found){
+                            found = false
+                            console.log(idx)
+                            return { value : list[idx], done : false}
+                        } else {
+                            return { value : undefined, done : true }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    function isPrime(no){
+        for (var i = 2; i <= (no/2); i++)
+            if (no % i === 0){
+                return false
+            }
+        return true
+    }
+
+
+
 12. Symbol
