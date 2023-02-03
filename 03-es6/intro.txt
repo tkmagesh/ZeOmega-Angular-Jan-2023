@@ -1,0 +1,95 @@
+ES6 features
+
+1. let
+2. const
+3. Array destructuring
+    var nos = [10,20,30,40,50]
+    var [x, y] = nos
+
+4. Rest operator (array)
+    var [x, y, ...z] = nos
+
+5. Spread operator (array)
+    var newNos = [ ...nos, 100, 200, 300 ]
+
+6. Object destructuring
+    var emp = {
+        id : 100,
+        name : 'Magesh',
+        salary : 10000
+    }
+    var {id , salary} = emp
+    var {id:x , salary:y} = emp
+
+7. Rest operator (Object)
+    var { id : x, ...z } = emp
+
+8. Spread operator (Object)
+    var newEmp = { ...emp, city : 'Bengaluru' }
+
+9. Arrow functions
+    /*
+        //function statement
+        function add(x,y){
+            return x + y
+        }
+
+        //function expression
+        var add = function(x,y){
+            return x + y;
+        }
+
+        //arrow function
+        var add = (x,y) => {
+            return x + y;
+        }
+
+        */
+        var add = (x,y) => x + y;
+
+        var nos = [3,1,4,2,5]
+
+        nos.filter(function(no){
+            return no % 2 === 0;
+        })
+
+        nos.filter((no) => no % 2 === 0)
+
+10. template strings
+    var x = 10, y = 20
+    
+    // sum of 10 and 20 is 30
+    
+    var s1 = 'sum of ' + x + ' and ' + y + ' is ' + (x+y)
+    var s2 = `sum of ${x} and ${y} is ${x+y}`
+
+11. iterators
+    var nos = [3,1,4,2,5]
+    for (var no of nos)
+        console.log(no)
+
+
+    Custom iterators
+    function listIterator(){
+        var list = [100,200,300,400]
+        
+        return {
+            [Symbol.iterator] : function(){
+                var idx = -1;
+                return {
+                    next : function(){
+                        idx++
+                        if (idx < list.length){
+                            return { value : list[idx], done : false }
+                        } else {
+                            return { value : undefined, done : true }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (var x of listIterator())
+    console.log(x)
+
+12. Symbol
