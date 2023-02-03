@@ -1,3 +1,6 @@
+https://bit.ly/javascript-training-videos
+
+
 JS Functions
     1. Functions are first class citizens (Higher Order Functions)
 
@@ -101,8 +104,52 @@ var isEven = memoize(function(no){
 TODO:
 Rewrite the Memoize function so that it can work with any function taking any number of arguments
 
+function memoize(fn) {
+    var cache = {}
+    return function(){
+        var key = JSON.stringify(arguments)
+        if (typeof cache[key] !== 'undefined')
+            return cache[key];
+        console.log('processing')
+        cache[key] = fn.apply(undefined, arguments)
+        return cache[key]
+    }
+}
+
 The following should work
 var add = memoize(function(x,y){
     return x + y
 })
 add(100,200)
+
+
+Function Invocation Patterns
+    1. As a method of an object
+    2. As a function
+    3. Using the 'call' method of the function
+    4. Using the 'apply' method of the function
+    5. Using the 'new' keyword
+        this => new object
+        this => returned by default
+
+    6. As an Immediately Invoked Function Expression (IIFE)
+
+
+var productsArr = [
+    { id: 1, name: 'Pen'},
+    { id: 2, name: 'Pencil' },
+    { id: 3, name: 'Marker' },
+    { id: 4, name: 'Notepad' },
+    { id: 5, name: 'Stappler' },
+]
+
+var productsMap = {
+    1 : { id: 1, name: 'Pen' },
+    2 : { id: 2, name: 'Pencil' },
+    3 : { id: 3, name: 'Marker' },
+    4 : { id: 4, name: 'Notepad' },
+    5: { id: 5, name: 'Stappler' },
+    length : 5
+}
+
+[].slice.call(productsMap,1,3)
