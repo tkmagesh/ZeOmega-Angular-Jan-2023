@@ -136,6 +136,16 @@ ES6 features
         return true
     }
 
+12. Generator
+function *getPrimes(list) {
+    for (var i = 0; i < list.length; i++){
+        if (isPrime(list[i])){
+            yield list[i]
+        }
+    }
+    return
+}
 
+13. Symbol
 
-12. Symbol
+14. Promise
