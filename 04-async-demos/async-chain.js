@@ -124,7 +124,7 @@ function multiplyAsyncClient(x, y, times) {
 } */
 
 //async (step-3)
-function addAsync(x, y) {
+/* function addAsync(x, y) {
     console.log(`   [@addAsync] processing ${x} and ${y}`)
     return new Promise(function (resolve, reject) {
         setTimeout(() => {
@@ -165,5 +165,58 @@ function multiplyAsyncClient(x, y, times) {
         .then((finalResult) => {
             console.log("[@multiplyAsyncClient] final Result ", finalResult)
         })
+} */
+
+
+//async (step-4) (using async/await)
+function addAsync(x, y) {
+    console.log(`   [@addAsync] processing ${x} and ${y}`)
+    return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+            const result = x + y
+            console.log(`   [@addAsync] returning result`)
+            resolve(result)
+        }, 4000);
+    })
 }
 
+/* function addAsyncClient(x, y) {
+    console.log(`[@addAsyncClient] invoking the service`)
+    addAsync(x, y)
+        .then((result) => {
+            console.log(`[@addAsyncClient] result = ${result}`)
+            // return result
+        })
+
+} */
+async function addAsyncClient(x, y) {
+    console.log(`[@addAsyncClient] invoking the service`)
+    const result = await addAsync(x, y)
+    console.log(`[@addAsyncClient] result = ${result}`)
+    // return "dummy" // returns a promise resolved with "dummy"
+    //
+    
+    return result
+    /* return new Promise((resolve, reject) => {
+        resolve('dummy')
+    }) */
+    //return Promise.resolve('dummy')
+}
+
+async function multiplyAsync(x, y, times) {
+    console.log(`[@multiplyAsync] invoking the service`)
+    const addResult = await addAsyncClient(x, y)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const multiplyResult = addResult * times
+            console.log(`[@multiplyAsync] result = ${multiplyResult}`)
+            resolve(multiplyResult)
+        }, 4000)
+    })
+}
+
+async function multiplyAsyncClient(x, y, times) {
+    console.log(`[@multiplyAsyncClient] invoking the service`)
+    const finalResult = await multiplyAsync(x, y, times)
+    console.log("[@multiplyAsyncClient] final Result ", finalResult)    
+}
