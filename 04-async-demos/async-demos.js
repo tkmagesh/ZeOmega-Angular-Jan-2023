@@ -56,6 +56,19 @@
         })
     }
 
+    function multiplyAsync(x,y, times){
+        //call the addAsyncPromiseClient(x,y)
+        //get the result (modify addAsyncPromiseClient function accordingly)
+        //multiply by 'times'
+        //return the result
+    }
+
+    function multiplyAsyncClient(x, y, times){
+        //call the multiplyAsync
+        //get the result
+        //print the result
+    }
+
     window['addAsyncPromiseClient'] = addAsyncPromiseClient
 
     async function addAsyncPromiseClient2(x, y) {
