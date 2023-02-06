@@ -8,6 +8,7 @@ let obs$ = new Observable(subscriber => {
     subscriber.next(40)
     // subscriber.error(new Error('invalid arguments'))
     subscriber.complete()
+    return () => console.log('observable unsubscribed')
 })
 
 let subscription = obs$.subscribe({
@@ -19,4 +20,6 @@ let subscription = obs$.subscribe({
 subscription.unsubscribe()
 
 
-Write a function that creates an observable for the given array of values
+/* 
+Write a function that creates an observable for the given array of values 
+*/
