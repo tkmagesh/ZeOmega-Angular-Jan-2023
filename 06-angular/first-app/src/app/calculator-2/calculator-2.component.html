@@ -1,0 +1,14 @@
+<h2>Calculator-2</h2>
+<input type="number" #txtN1 (input)="n1 = txtN1.value">
+<select #selectOperator (change)="operation = selectOperator.value" >
+    <option value="">----Select----</option>
+    <option value="add">Add</option>
+    <option value="subtract">Subtract</option>
+    <option value="multiply">Multiply</option>
+    <option value="divide">Divide</option>
+</select>
+<input type="number" #txtN2 (input)="n2 = txtN2.value">
+<button (click)="onBtnCalculateClick()">Calculate</button>
+<div class="result" [ngClass]="{positive : result >= 0, negative : result < 0}">
+    {{result}}
+</div>

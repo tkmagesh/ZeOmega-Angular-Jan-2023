@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { CalculatorService } from "../services/calculator.service";
 
 @Component({
     selector : 'app-calculator',
@@ -12,6 +13,19 @@ export class CalculatorComponent{
     #n2 : number = 0
 
     resultStyle : string = 'result'
+    
+    /* 
+    calculatorService! : CalculatorService;
+
+    constructor(calculatorService : CalculatorService){
+        this.calculatorService = calculatorService
+    } 
+    */
+    constructor(public calculatorService : CalculatorService){
+
+    }
+
+
    /* 
     setN1(val : string) {
         this.n1 = Number(val)
@@ -31,18 +45,18 @@ export class CalculatorComponent{
     }
 
     onBtnAddClick(){
-        this.result = this.#n1 + this.#n2
+        this.result = this.calculatorService.add(this.#n1, this.#n2)
     }
 
     onBtnSubtractClick(){
-        this.result = this.#n1 - this.#n2
+        this.result = this.calculatorService.subtract(this.#n1, this.#n2)
     }
 
     onBtnMultiplyClick(){
-        this.result = this.#n1 * this.#n2
+        this.result = this.calculatorService.multiply(this.#n1, this.#n2)
     }
 
     onBtnDivideClick(){
-        this.result = this.#n1 / this.#n2
+        this.result = this.calculatorService.divide(this.#n1, this.#n2)
     }
 }
