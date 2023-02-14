@@ -1,0 +1,24 @@
+<h2>Calculator</h2>
+<hr>
+<input type="number" #txtNumber1 (input)="n1 = txtNumber1.value">
+<!-- <button (click)="setN1(txtNumber1.value)">Set N1</button> -->
+<input type="number" #txtNumber2 (input)="n2 = txtNumber2.value">
+<!-- <button (click)="setN2(txtNumber2.value)">Set N2</button> -->
+
+<!-- The following is not advisable (though possible) -->
+<!-- 
+    <input type="number" (input)="n1 = $any($event.target).value">
+    <input type="number" (input)="n2 = $any($event.target).value"> 
+-->
+<br>
+<button (click)="onBtnAddClick()">Add</button>
+<button (click)="onBtnSubtractClick()">Subtract</button>
+<button (click)="onBtnMultiplyClick()">Multiply</button>
+<button (click)="onBtnDivideClick()">Divide</button>
+<!-- <div class="result">{{result}}</div> -->
+<div 
+    [class]="resultStyle" 
+    [ngClass]="{positive : result >= 0, negative : result < 0}"
+>
+    {{result}}
+</div>
