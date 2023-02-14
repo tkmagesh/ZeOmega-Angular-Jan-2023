@@ -16,9 +16,4 @@
 <button (click)="onBtnMultiplyClick()">Multiply</button>
 <button (click)="onBtnDivideClick()">Divide</button>
 <!-- <div class="result">{{result}}</div> -->
-<div 
-    [class]="resultStyle" 
-    [ngClass]="{positive : result >= 0, negative : result < 0}"
->
-    {{result}}
-</div>
+<app-calculator-result [data]="result"></app-calculator-result>

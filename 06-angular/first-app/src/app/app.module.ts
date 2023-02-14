@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { Calculator2Component } from './calculator-2/calculator-2.component';
+import { CalculatorResultComponent } from './calculator-result/calculator-result.component';
 import { CalculatorComponent } from './calculator/calculator.component';
+import { AdvCalculatorService } from './services/adv-calcualtor.service';
 import { CalculatorService } from './services/calculator.service';
 
 @NgModule({
@@ -11,7 +13,8 @@ import { CalculatorService } from './services/calculator.service';
   declarations: [
     AppComponent,
     CalculatorComponent,
-    Calculator2Component
+    Calculator2Component,
+    CalculatorResultComponent
   ],
   /* Dependency Modules */
   imports: [
@@ -19,8 +22,8 @@ import { CalculatorService } from './services/calculator.service';
   ],
   /* All NON-UI entities (Services)*/
   providers: [
-    /* { provide : CalculatorService, useClass : CalculatorService } */
-    CalculatorService
+    { provide : CalculatorService, useClass : CalculatorService }
+    // CalculatorService
   ],
 
   /* Root Component(s) */
