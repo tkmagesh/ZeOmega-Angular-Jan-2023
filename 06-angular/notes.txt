@@ -1,0 +1,27 @@
+Angular Building Blocks
+
+1. Module
+    Logical grouping of angular building blocks
+    Dependency Injection
+
+2. Component
+    Represents 1 UI responsibility
+    Reusable
+    Composable
+    Responsibilities
+        - Presentation
+        - React to user actions
+        - Manage State (conditions apply)
+        - Synchronize UI whenever the state is changing
+
+3. Directive
+    - DOM Manipulation
+
+4. Pipe
+    Data Transformation logic for presentation
+
+5. Service
+    NON UI responsibilities
+
+
+npm install -g @angular/cli

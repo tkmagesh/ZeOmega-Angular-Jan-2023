@@ -5,7 +5,7 @@ const subject2 = new Subject();
 const subject3 = new Subject();
 
 /* 
-combineLatestWith(subject1, subject2, subject3).subscribe(val => {
+combineLatest(subject1, subject2, subject3).subscribe(val => {
     console.log(val);
 }) 
 */
