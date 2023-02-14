@@ -5,8 +5,10 @@ import { AppComponent } from './app.component';
 import { Calculator2Component } from './calculator-2/calculator-2.component';
 import { CalculatorResultComponent } from './calculator-result/calculator-result.component';
 import { CalculatorComponent } from './calculator/calculator.component';
+import { ProductsComponent } from './products/products.component';
 import { AdvCalculatorService } from './services/adv-calcualtor.service';
 import { CalculatorService } from './services/calculator.service';
+
 
 @NgModule({
   /* All UI entities (Components, Directives & Pipes) */
@@ -14,7 +16,8 @@ import { CalculatorService } from './services/calculator.service';
     AppComponent,
     CalculatorComponent,
     Calculator2Component,
-    CalculatorResultComponent
+    CalculatorResultComponent,
+    ProductsComponent
   ],
   /* Dependency Modules */
   imports: [
@@ -30,7 +33,8 @@ import { CalculatorService } from './services/calculator.service';
   bootstrap: [
     AppComponent,
     CalculatorComponent,
-    Calculator2Component
+    Calculator2Component,
+    ProductsComponent
   ]
 })
 export class AppModule { }
