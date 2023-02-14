@@ -12,6 +12,7 @@ export class Calculator2Component{
 
     resultStyle: string = 'result'
     selectedOperation : string = ''
+    errorMessage : string = ''
 
     /* 
      setN1(val : string) {
@@ -36,6 +37,10 @@ export class Calculator2Component{
     }
 
     onBtnCalculateClick(){
+        if (this.selectedOperation == ''){
+            this.errorMessage = 'Invalid operation selection!'
+            return
+        }
         switch (this.selectedOperation) {
             case 'add':
                 this.result = this.#n1 + this.#n2
@@ -52,6 +57,7 @@ export class Calculator2Component{
             default:
                 break;
         }
+        this.errorMessage = ''
     }
 
 

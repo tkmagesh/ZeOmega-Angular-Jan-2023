@@ -12,3 +12,4 @@
 <div class="result" [ngClass]="{positive : result >= 0, negative : result < 0}">
     {{result}}
 </div>
+<div *ngIf="errorMessage !== ''">Message : {{errorMessage}}</div>
