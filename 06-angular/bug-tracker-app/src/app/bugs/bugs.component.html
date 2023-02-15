@@ -20,7 +20,7 @@
 <section class="list">
     <ul>
         <li *ngFor="let bug of bugs">
-            <span class="bugname">{{bug}}</span>
+            <span class="bugname">{{bug | json}}</span>
             <div class="datetime">[Created At]</div>
             <button (click)="onBtnRemoveClick(bug)">Remove</button>
         </li>
