@@ -9,7 +9,10 @@
 </select>
 <input type="number" #txtN2 (input)="n2 = txtN2.value">
 <button (click)="onBtnCalculateClick()">Calculate</button>
-<div class="result" [ngClass]="{positive : result >= 0, negative : result < 0}">
-    {{result}}
+<div 
+    class="result" 
+    [ngClass]="{positive : calculatorService.result >= 0, negative : calculatorService.result < 0}"
+>
+    {{calculatorService.result}}
 </div>
 <div *ngIf="errorMessage !== ''">Message : {{errorMessage}}</div>

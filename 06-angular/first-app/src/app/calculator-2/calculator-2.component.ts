@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
+import { CalculatorService } from "../services/calculator.service";
 
 @Component({
     selector : 'app-calculator-2',
     templateUrl : 'calculator-2.component.html',
-    styleUrls : ['calculator-2.component.css']
+    styleUrls : ['calculator-2.component.css'],
+    providers : [CalculatorService]
 })
 export class Calculator2Component{
-    result: number = 0
-    #n1: number = 0
-    #n2: number = 0
+    
 
     resultStyle: string = 'result'
     selectedOperation : string = ''
@@ -24,12 +24,16 @@ export class Calculator2Component{
      } 
      */
 
+     constructor(public calculatorService : CalculatorService){
+
+     }
+
     set n1(val: string) {
-        this.#n1 = Number(val)
+        this.calculatorService.x = Number(val)
     }
 
     set n2(val: string) {
-        this.#n2 = Number(val)
+        this.calculatorService.y = Number(val)
     }
 
     set operation(val : string) {
@@ -43,16 +47,16 @@ export class Calculator2Component{
         }
         switch (this.selectedOperation) {
             case 'add':
-                this.result = this.#n1 + this.#n2
+                this.calculatorService.add()
                 break;
             case 'subtract':
-                this.result = this.#n1 - this.#n2
+                this.calculatorService.subtract()
                 break;
             case 'multiply':
-                this.result = this.#n1 * this.#n2
+                this.calculatorService.multiply()
                 break;
             case 'divide':
-                this.result = this.#n1 / this.#n2
+                this.calculatorService.divide()
                 break;
             default:
                 break;

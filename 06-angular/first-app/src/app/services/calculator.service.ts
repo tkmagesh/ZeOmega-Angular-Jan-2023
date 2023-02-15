@@ -1,15 +1,19 @@
 
 export class CalculatorService {
-    add(x : number, y : number) : number {
-        return x + y
+    x: number = 0
+    y: number = 0
+    result: number = 0
+
+    add()  {
+        this.result = this.x + this.y
     }
-    subtract(x: number, y: number): number {
-        return x - y
+    subtract() {
+        this.result = this.x - this.y
     }
-    multiply(x: number, y: number): number {
-        return x * y
+    multiply() {
+        this.result = this.x * this.y
     }
-    divide(x: number, y: number): number {
-        return x / y
+    divide() {
+        this.result = this.x / this.y
     }
 }

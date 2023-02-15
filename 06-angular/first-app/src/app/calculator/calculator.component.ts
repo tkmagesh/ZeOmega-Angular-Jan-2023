@@ -4,23 +4,15 @@ import { CalculatorService } from "../services/calculator.service";
 @Component({
     selector : 'app-calculator',
     templateUrl : 'calculator.component.html',
-    styleUrls : ['calculator.component.css']
+    styleUrls : ['calculator.component.css'],
+    providers : [CalculatorService]
 })
 export class CalculatorComponent{
     
-    result : number = 0
-    #n1 : number = 0
-    #n2 : number = 0
+    
 
     resultStyle : string = 'result'
     
-    /* 
-    calculatorService! : CalculatorService;
-
-    constructor(calculatorService : CalculatorService){
-        this.calculatorService = calculatorService
-    } 
-    */
     constructor(public calculatorService : CalculatorService){
 
     }
@@ -37,26 +29,26 @@ export class CalculatorComponent{
     */
 
     set n1(val: string) {
-        this.#n1 = Number(val)
+        this.calculatorService.x = Number(val)
     }
 
     set n2(val: string) {
-        this.#n2 = Number(val)
+        this.calculatorService.y = Number(val)
     }
 
     onBtnAddClick(){
-        this.result = this.calculatorService.add(this.#n1, this.#n2)
+        this.calculatorService.add()
     }
 
     onBtnSubtractClick(){
-        this.result = this.calculatorService.subtract(this.#n1, this.#n2)
+        this.calculatorService.subtract()
     }
 
     onBtnMultiplyClick(){
-        this.result = this.calculatorService.multiply(this.#n1, this.#n2)
+        this.calculatorService.multiply()
     }
 
     onBtnDivideClick(){
-        this.result = this.calculatorService.divide(this.#n1, this.#n2)
+        this.calculatorService.divide()
     }
 }

@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   /* state */
   title = 'first-app';
-
+  userChoice : string = '';
+  
   constructor(){
    /* 
     setTimeout(() => {
