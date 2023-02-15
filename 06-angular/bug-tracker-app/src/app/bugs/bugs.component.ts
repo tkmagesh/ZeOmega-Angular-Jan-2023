@@ -9,6 +9,10 @@ import { BugOperationsService } from "./services/bugOperations.service";
 })
 export class BugsComponent{
     bugs : Bug[] = [
+        {id : 1, name : "Server communication failure", isClosed : false, createdAt : new Date(2023,1,11)},
+        { id: 2, name: "Data integrity checks failed", isClosed: true, createdAt: new Date(2023, 1, 10) },
+        { id: 3, name: "User access denied", isClosed: true, createdAt: new Date(2023, 1, 9) },
+        { id: 4, name: "Application not responding", isClosed: false, createdAt: new Date(2023, 1, 7) }
         
     ]
 
