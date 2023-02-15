@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BugsComponent } from './bugs/bugs.component';
+import { BugOperationsService } from './bugs/services/bugOperations.service';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,9 @@ import { BugsComponent } from './bugs/bugs.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    BugOperationsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
