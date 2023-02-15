@@ -16,6 +16,9 @@ export class BugsComponent{
         
     ]
 
+    sortByAttrName : string = ''
+    sortByDesc : boolean = false
+
     constructor(public bugOperations : BugOperationsService){
 
     }
