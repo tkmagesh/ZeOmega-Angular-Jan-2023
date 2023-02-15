@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bug Tracker</title>
     <style>
+        /* src/styles.css */
         body{
             margin-left: 50px;
         }
+        /* bugs.component.css */
         section{
             margin-bottom: 10px;
         }
@@ -44,8 +46,8 @@
         Use Cases:
             1. Add new bugs
             2. List the added bugs
-            3. Toggle the status of any bug
-            4. Remove any bug
+            3. Remove any bug
+            4. Toggle the status of any bug
             5. Remove all closed bugs
             6. Display stats ( # of closed bugs / total # of bugs )
             7. Improve the display of "createdAt"
@@ -57,8 +59,10 @@
      -->
 </head>
 <body>
+    <!-- app.component.html -->
     <h1>Bug Tracker</h1>
     <hr>
+    <!-- bugs.component.html -->
     <section class="stats">
         <span class="closed">1</span>
         <span> / </span>
