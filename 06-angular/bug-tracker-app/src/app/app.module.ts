@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BugsComponent } from './bugs/bugs.component';
+import { BugStatsComponent } from './bugs/components/bug-stats/bug-stats.component';
+import { ClosedCountPipe } from './bugs/pipes/closedCount.pipe';
 import { ElapsedPipe } from './bugs/pipes/elapsed.pipe';
 import { SortPipe } from './bugs/pipes/sort.pipe';
 import { BugOperationsService } from './bugs/services/bugOperations.service';
@@ -12,7 +14,9 @@ import { BugOperationsService } from './bugs/services/bugOperations.service';
     AppComponent,
     SortPipe,
     ElapsedPipe,
-    BugsComponent
+    ClosedCountPipe,
+    BugsComponent,
+    BugStatsComponent
   ],
   imports: [
     BrowserModule

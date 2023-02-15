@@ -18,21 +18,24 @@ export class BugsComponent{
 
     sortByAttrName : string = ''
     sortByDesc : boolean = false
+    newBugName : string = ''
 
     constructor(public bugOperations : BugOperationsService){
 
     }
    
 
-    onBtnAddNewClick(newBugName : string){
-        const newBug = this.bugOperations.createNew(newBugName)
-        this.bugs.push(newBug)
+    onBtnAddNewClick(){
+        const newBug = this.bugOperations.createNew(this.newBugName)
+        // this.bugs.push(newBug)
+        this.bugs = [...this.bugs, newBug]
 
     }
 
-   /*  onBugNameClick(bugToToggle : Bug) {
-        this.bugOperations.toggle(bugToToggle)
-    } */
+    onBugNameClick(bugToToggle : Bug) {
+        const toggledBug = this.bugOperations.toggle(bugToToggle)
+        this.bugs = this.bugs.map(bug => bug.id === bugToToggle.id ? toggledBug : bug)
+    }
 
     onBtnRemoveClick(bugToRemove : Bug){
         this.bugs = this.bugs.filter(bug => bug.id != bugToRemove.id)
@@ -43,6 +46,7 @@ export class BugsComponent{
     }
 
     getClosedCount() : number {
+        console.info('getClosedCount() triggered')
         return this.bugs.reduce((result, bug) => bug.isClosed ? result + 1 : result, 0)
     }
 

@@ -13,7 +13,15 @@ export class BugOperationsService{
         return newBug
     }
 
+    //mutable
+    /* 
     toggle(bugToToggle : Bug) {
         bugToToggle.isClosed = !bugToToggle.isClosed
+    } 
+    */
+    //immutable
+    toggle(bugToToggle: Bug) : Bug {
+        const toggledBug = { ...bugToToggle, isClosed : !bugToToggle.isClosed }
+        return toggledBug
     }
 }
