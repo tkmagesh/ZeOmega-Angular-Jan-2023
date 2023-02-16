@@ -1,20 +1,23 @@
-<app-bug-stats [data]="bugApi.bugs"></app-bug-stats>
-<app-bug-edit></app-bug-edit>
-<app-bug-sort (sortChanged)="onSortChanged($event)"></app-bug-sort>
-<section class="list">
-    <ul>
-        <li *ngFor="let bug of bugApi.bugs | sort:sortByAttrName:sortByDesc">
-            <span 
-                class="bugname"
-                [ngClass]="{closed : bug.isClosed}"
-                (click)="onBugNameClick(bug)"
-                >{{bug.name}}</span>
-            <div 
-                class="datetime"
-                [title]="bug.createdAt"
-            >{{bug.createdAt | elapsed}}</div>
-            <button (click)="onBtnRemoveClick(bug)">Remove</button>
-        </li>
-    </ul>
-    <button (click)="onBtnRemoveClosedClick()">Remove Closed</button>
-</section>
+
+<div *ngIf="(bugApi.bugs$ | async) as bugs">
+    <app-bug-stats [data]="bugs"></app-bug-stats>
+    <app-bug-edit></app-bug-edit>
+    <app-bug-sort (sortChanged)="onSortChanged($event)"></app-bug-sort>
+    <section class="list">
+        <ul>
+            <li *ngFor="let bug of bugs | sort:sortByAttrName:sortByDesc">
+                <span 
+                    class="bugname"
+                    [ngClass]="{closed : bug.isClosed}"
+                    (click)="onBugNameClick(bug)"
+                    >{{bug.name}}</span>
+                <div 
+                    class="datetime"
+                    [title]="bug.createdAt"
+                >{{bug.createdAt | elapsed}}</div>
+                <button (click)="onBtnRemoveClick(bug)">Remove</button>
+            </li>
+        </ul>
+        <button (click)="onBtnRemoveClosedClick()">Remove Closed</button>
+    </section>
+</div>

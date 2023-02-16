@@ -25,6 +25,7 @@ export class SortPipe<T> implements PipeTransform {
 
     transform(list: T[], attrName: keyof T, descending: boolean = false): T[] {
         // console.info("sort.transform triggered")
+        if (!list ) return list
         let comparer = this.getComparerFor(attrName)
         if (descending) {
             comparer = this.getDescComparerFor(comparer)
