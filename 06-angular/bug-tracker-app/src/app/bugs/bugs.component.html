@@ -1,17 +1,6 @@
 <app-bug-stats [data]="bugs"></app-bug-stats>
-<section class="sort">
-    <label for="">Order By :</label>
-    <select #selectSortBug (change)="sortByAttrName = selectSortBug.value">
-        <option value="">---Select---</option>
-        <option value="id">Id</option>
-        <option value="name">Name</option>
-        <option value="isClosed">Status</option>
-        <option value="createdAt">Created</option>
-    </select>
-    <label for="">Descending ?:</label>
-    <input type="checkbox" #chkIsDesc (change)="sortByDesc = chkIsDesc.checked">
-</section>
 <app-bug-edit (bugCreated)="onBugAdded($event)"></app-bug-edit>
+<app-bug-sort (sortChanged)="onSortChanged($event)"></app-bug-sort>
 <section class="list">
     <ul>
         <li *ngFor="let bug of bugs | sort:sortByAttrName:sortByDesc">

@@ -9,6 +9,7 @@ import { ClosedCountPipe } from './bugs/pipes/closedCount.pipe';
 import { ElapsedPipe } from './bugs/pipes/elapsed.pipe';
 import { SortPipe } from './bugs/pipes/sort.pipe';
 import { BugOperationsService } from './bugs/services/bugOperations.service';
+import { BugSortComponent } from './bugs/components/bug-sort/bug-sort.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { BugOperationsService } from './bugs/services/bugOperations.service';
     ClosedCountPipe,
     BugsComponent,
     BugStatsComponent,
+    BugSortComponent,
     BugEditComponent
   ],
   imports: [

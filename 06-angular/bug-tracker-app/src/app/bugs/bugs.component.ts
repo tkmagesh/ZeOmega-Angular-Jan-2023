@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { BugSortEventArgs } from "./components/bug-sort/bug-sort.component";
 import { Bug } from "./models/bug";
 import { BugOperationsService } from "./services/bugOperations.service";
 
@@ -22,6 +23,10 @@ export class BugsComponent{
         this.bugs = [...this.bugs, newBug]
     }
 
+    onSortChanged(sortEvtArg: BugSortEventArgs){
+        this.sortByAttrName = sortEvtArg.attrName
+        this.sortByDesc = sortEvtArg.desc
+    }
    
 
     onBugNameClick(bugToToggle : Bug) {
