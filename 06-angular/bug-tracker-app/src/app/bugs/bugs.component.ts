@@ -10,28 +10,17 @@ import { BugOperationsService } from "./services/bugOperations.service";
     styleUrls : ['bugs.component.css']
 })
 export class BugsComponent implements OnInit{
-    bugs : Bug[] = []
 
     sortByAttrName : string = ''
     sortByDesc : boolean = false
     
 
-    constructor(
-        public bugOperations : BugOperationsService,
-        private bugApi : BugApiService
-        ){
+    constructor(public bugApi : BugApiService){
 
     }
     ngOnInit(): void {
-        this.bugApi
-            .getAll()
-            .subscribe(bugs => {
-                this.bugs = bugs
-            });
-    }
-
-    onBugAdded(newBug : Bug){
-        this.bugs = [...this.bugs, newBug]
+        this.bugApi.getAll()
+           
     }
 
     onSortChanged(sortEvtArg: BugSortEventArgs){
@@ -41,23 +30,14 @@ export class BugsComponent implements OnInit{
    
 
     onBugNameClick(bugToToggle : Bug) {
-        const toggledBugData = this.bugOperations.toggle(bugToToggle)
-        this.bugApi
-            .save(toggledBugData)
-            .subscribe(toggledBug => this.bugs = this.bugs.map(bug => bug.id === bugToToggle.id ? toggledBug : bug))
-        
+        this.bugApi.toggle(bugToToggle)
     }
 
     onBtnRemoveClick(bugToRemove : Bug){
-        this.bugApi
-            .remove(bugToRemove)
-            .subscribe(_ => this.bugs = this.bugs.filter(bug => bug.id != bugToRemove.id))
-        
+        this.bugApi.remove(bugToRemove)
     }
 
     onBtnRemoveClosedClick(){
-        this.bugs
-            .filter(bug => bug.isClosed)
-            .forEach(this.onBtnRemoveClick, this)
+        this.bugApi.removeClosed()
     }
 }

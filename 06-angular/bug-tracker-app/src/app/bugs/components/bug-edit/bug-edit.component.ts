@@ -22,10 +22,6 @@ export class BugEditComponent{
     }
     onBtnAddNewClick() {
         const newBugData = this.bugOperations.createNew(this.newBugName)
-        this.bugApi
-            .save(newBugData)
-            .subscribe(newBug => {
-                this.bugCreated.emit(newBug)
-            })
+        this.bugApi.save(newBugData)
     }
 }

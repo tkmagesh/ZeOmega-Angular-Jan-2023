@@ -1,9 +1,9 @@
-<app-bug-stats [data]="bugs"></app-bug-stats>
-<app-bug-edit (bugCreated)="onBugAdded($event)"></app-bug-edit>
+<app-bug-stats [data]="bugApi.bugs"></app-bug-stats>
+<app-bug-edit></app-bug-edit>
 <app-bug-sort (sortChanged)="onSortChanged($event)"></app-bug-sort>
 <section class="list">
     <ul>
-        <li *ngFor="let bug of bugs | sort:sortByAttrName:sortByDesc">
+        <li *ngFor="let bug of bugApi.bugs | sort:sortByAttrName:sortByDesc">
             <span 
                 class="bugname"
                 [ngClass]="{closed : bug.isClosed}"

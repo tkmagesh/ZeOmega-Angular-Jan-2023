@@ -1,11 +1,9 @@
 import { Bug } from "../models/bug";
 
 export class BugOperationsService{
-    private _currentBugId: number = 0
-
     createNew(newBugName : string) : Bug {
         const newBug: Bug = {
-            id: ++this._currentBugId,
+            id: 0,
             name: newBugName,
             isClosed: false,
             createdAt: new Date()
