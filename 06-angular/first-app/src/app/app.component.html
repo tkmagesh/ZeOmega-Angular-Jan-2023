@@ -5,23 +5,22 @@
 <input type="text" #txtNewTitle>
 <button (click)="onBtnChangeTitleClick(txtNewTitle.value)">Change Title</button>
 <hr>
-<app-calculator></app-calculator>
-<app-calculator-2></app-calculator-2>
-<!-- <div>
+<div>
     <button (click)="userChoice = 'Calculator-1'">Calculator-1</button>
     <button (click)="userChoice = 'Calculator-2'">Calculator-2</button>
     <button (click)="userChoice = 'Products'">Products</button>
 </div>
 <hr>
+<!-- 
  --><!-- Using ngIf -->
 <!-- 
     <app-calculator *ngIf="userChoice === 'Calculator-1'"></app-calculator>
     <app-calculator-2 *ngIf="userChoice === 'Calculator-2'"></app-calculator-2>
     <app-products *ngIf="userChoice === 'Products'"></app-products> 
 -->
-<!-- <div [ngSwitch]="userChoice">
+<div [ngSwitch]="userChoice">
     <app-calculator *ngSwitchCase="'Calculator-1'"></app-calculator>
     <app-calculator-2 *ngSwitchCase="'Calculator-2'"></app-calculator-2>
     <app-products *ngSwitchCase="'Products'"></app-products>
     <div *ngSwitchDefault>Make a choice!</div>
-</div> -->
+</div>
