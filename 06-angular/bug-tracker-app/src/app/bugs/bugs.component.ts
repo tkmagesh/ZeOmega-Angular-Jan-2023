@@ -8,29 +8,21 @@ import { BugOperationsService } from "./services/bugOperations.service";
     styleUrls : ['bugs.component.css']
 })
 export class BugsComponent{
-    bugs : Bug[] = [
-        {id : 1, name : "Server communication failure", isClosed : false, createdAt : new Date(2023,1,11)},
-        { id: 2, name: "Data integrity checks failed", isClosed: true, createdAt: new Date(2023, 1, 10) },
-        { id: 3, name: "User access denied", isClosed: true, createdAt: new Date(2023, 1, 9) },
-        { id: 4, name: "Application not responding", isClosed: false, createdAt: new Date(2023, 1, 7) }
-        
-    ]
+    bugs : Bug[] = []
 
     sortByAttrName : string = ''
     sortByDesc : boolean = false
-    newBugName : string = ''
+    
 
     constructor(public bugOperations : BugOperationsService){
 
     }
    
-
-    onBtnAddNewClick(){
-        const newBug = this.bugOperations.createNew(this.newBugName)
-        // this.bugs.push(newBug)
+    onBugAdded(newBug : Bug){
         this.bugs = [...this.bugs, newBug]
-
     }
+
+   
 
     onBugNameClick(bugToToggle : Bug) {
         const toggledBug = this.bugOperations.toggle(bugToToggle)

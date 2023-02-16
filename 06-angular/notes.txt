@@ -25,3 +25,6 @@ Angular Building Blocks
 
 
 npm install -g @angular/cli
+
+1. Unsubscribe after timeout
+2. Handle http errors (http interceptors)
