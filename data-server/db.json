@@ -1,12 +1,6 @@
 {
   "bugs": [
     {
-      "id": 1,
-      "name": "Server communication failure",
-      "isClosed": true,
-      "createdAt": "2022-10-09T09:19:24.393Z"
-    },
-    {
       "id": 2,
       "name": "User access denied",
       "isClosed": false,
@@ -15,7 +9,7 @@
     {
       "id": 3,
       "name": "Application not responding",
-      "isClosed": true,
+      "isClosed": false,
       "createdAt": "2022-10-09T09:19:29.087Z"
     },
     {

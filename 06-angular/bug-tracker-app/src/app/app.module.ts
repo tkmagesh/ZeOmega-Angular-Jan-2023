@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { BugsComponent } from './bugs/bugs.component';
@@ -10,6 +11,10 @@ import { ElapsedPipe } from './bugs/pipes/elapsed.pipe';
 import { SortPipe } from './bugs/pipes/sort.pipe';
 import { BugOperationsService } from './bugs/services/bugOperations.service';
 import { BugSortComponent } from './bugs/components/bug-sort/bug-sort.component';
+import { BugApiService } from './bugs/services/bugApi.service';
+import { AppConfig, AppConfiguration, App_Config_Token } from './environment/config';
+
+
 
 @NgModule({
   declarations: [
@@ -23,10 +28,17 @@ import { BugSortComponent } from './bugs/components/bug-sort/bug-sort.component'
     BugEditComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [
-    BugOperationsService
+    /* 
+    BugOperationsService,
+    BugApiService 
+    */
+   {provide : BugOperationsService, useClass : BugOperationsService},
+   {provide : BugApiService, useClass : BugApiService},
+   {provide : App_Config_Token, useValue : AppConfiguration}
   ],
   bootstrap: [AppComponent]
 })

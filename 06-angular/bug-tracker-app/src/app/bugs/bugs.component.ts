@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { BugSortEventArgs } from "./components/bug-sort/bug-sort.component";
 import { Bug } from "./models/bug";
+import { BugApiService } from "./services/bugApi.service";
 import { BugOperationsService } from "./services/bugOperations.service";
 
 @Component({
@@ -8,17 +9,27 @@ import { BugOperationsService } from "./services/bugOperations.service";
     templateUrl : 'bugs.component.html',
     styleUrls : ['bugs.component.css']
 })
-export class BugsComponent{
+export class BugsComponent implements OnInit{
     bugs : Bug[] = []
 
     sortByAttrName : string = ''
     sortByDesc : boolean = false
     
 
-    constructor(public bugOperations : BugOperationsService){
+    constructor(
+        public bugOperations : BugOperationsService,
+        private bugApi : BugApiService
+        ){
 
     }
-   
+    ngOnInit(): void {
+        this.bugApi
+            .getAll()
+            .subscribe(bugs => {
+                this.bugs = bugs
+            });
+    }
+
     onBugAdded(newBug : Bug){
         this.bugs = [...this.bugs, newBug]
     }
@@ -30,21 +41,23 @@ export class BugsComponent{
    
 
     onBugNameClick(bugToToggle : Bug) {
-        const toggledBug = this.bugOperations.toggle(bugToToggle)
-        this.bugs = this.bugs.map(bug => bug.id === bugToToggle.id ? toggledBug : bug)
+        const toggledBugData = this.bugOperations.toggle(bugToToggle)
+        this.bugApi
+            .save(toggledBugData)
+            .subscribe(toggledBug => this.bugs = this.bugs.map(bug => bug.id === bugToToggle.id ? toggledBug : bug))
+        
     }
 
     onBtnRemoveClick(bugToRemove : Bug){
-        this.bugs = this.bugs.filter(bug => bug.id != bugToRemove.id)
+        this.bugApi
+            .remove(bugToRemove)
+            .subscribe(_ => this.bugs = this.bugs.filter(bug => bug.id != bugToRemove.id))
+        
     }
 
     onBtnRemoveClosedClick(){
-        this.bugs = this.bugs.filter(bug => !bug.isClosed)
+        this.bugs
+            .filter(bug => bug.isClosed)
+            .forEach(this.onBtnRemoveClick, this)
     }
-
-    getClosedCount() : number {
-        console.info('getClosedCount() triggered')
-        return this.bugs.reduce((result, bug) => bug.isClosed ? result + 1 : result, 0)
-    }
-
 }

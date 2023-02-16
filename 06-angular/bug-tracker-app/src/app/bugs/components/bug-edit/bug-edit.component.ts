@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { Bug } from "../../models/bug";
+import { BugApiService } from "../../services/bugApi.service";
 import { BugOperationsService } from "../../services/bugOperations.service";
 
 @Component({
@@ -13,11 +14,18 @@ export class BugEditComponent{
     @Output()
     bugCreated : EventEmitter<Bug> = new EventEmitter<Bug>()
 
-    constructor(private bugOperations : BugOperationsService){
+    constructor(
+        private bugOperations : BugOperationsService,
+        private bugApi : BugApiService
+    ){
 
     }
     onBtnAddNewClick() {
-        const newBug = this.bugOperations.createNew(this.newBugName)
-        this.bugCreated.emit(newBug)
+        const newBugData = this.bugOperations.createNew(this.newBugName)
+        this.bugApi
+            .save(newBugData)
+            .subscribe(newBug => {
+                this.bugCreated.emit(newBug)
+            })
     }
 }
