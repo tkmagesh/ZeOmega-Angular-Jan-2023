@@ -1,0 +1,46 @@
+<h1>Forms App</h1>
+<hr>
+<form [formGroup]="myForm">
+  <input type="text">
+  <br>
+  <input type="text" formControlName="name">
+  <div class="error" *ngIf="myForm.get('name')?.touched && myForm.get('name')?.invalid">
+    Name is required!
+  </div>
+  <input type="submit" value="Save" [disabled]="myForm.invalid">
+
+  <div>
+    <hr>
+    <div>Name State</div>
+
+    <div>
+      Valid : {{myForm.get('name')?.valid}}
+    </div>
+    <div>
+      Invalid : {{myForm.get('name')?.invalid}}
+    </div>
+    <div>
+      Pristine : {{myForm.get('name')?.pristine}}
+    </div>
+    <div>
+      Dirty : {{myForm.get('name')?.dirty}}
+    </div>
+    <div>
+      Touched : {{myForm.get('name')?.touched}}
+    </div>
+    <div>
+      Untouched : {{myForm.get('name')?.untouched}}
+    </div>
+    <div>
+      Errors : {{myForm.get('name')?.errors | json}}
+    </div>
+  </div>
+</form>
+<hr>
+<div>Form State:</div>
+<div>
+  Valid : {{myForm.valid}}
+</div>
+<div>
+  InValid : {{myForm.invalid}}
+</div>
