@@ -1,13 +1,14 @@
 <h1>Forms App</h1>
 <hr>
 <form [formGroup]="myForm">
-  <input type="text">
+  <input type="text"/>
   <br>
-  <input type="text" formControlName="name">
+  <input type="text" formControlName="name"/>
   <div class="error" *ngIf="myForm.get('name')?.touched && myForm.get('name')?.invalid">
     Name is required!
   </div>
-  <input type="submit" value="Save" [disabled]="myForm.invalid">
+  <input type="button" (click)="onResetClick()" value="Reset"/>
+  <input type="submit" value="Save" [disabled]="myForm.invalid"/>
 
   <div>
     <hr>
